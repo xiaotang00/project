@@ -201,7 +201,7 @@ def multi_project(ref_chan, cam_chan):
     camera_intrinsic[:3, :3] = camera_calibrated_data["camera_intrinsic"] # 相机内参
     global_to_camera = ego_to_camera @ global_to_ego
     # global_to_image = camera_intrinsic @ ego_to_camera @ global_to_ego
-    # print("完成global_to_image", global_to_camera)
+    # print("完成global_to_image", global_to_image)
 
     lidar_token = sample["data"][ref_chan]
     lidar_sample_data_rec = nusc.get('sample_data', lidar_token)
@@ -243,11 +243,11 @@ def multi_project(ref_chan, cam_chan):
     print("all_image_points: ", len(front_image_points), ",", len(front_image_points[0]))
     print("all_image_points_combine[0]:", all_image_points_combine[0])
 
-    # 深度值作为颜色映射
+    
     # 获取所有点的深度值
     depths = all_image_points_combine[all_image_points_combine[:, 2] > 0, 2]
     # 使用matplotlib的颜色映射
-    cmap = cm.get_cmap('plasma')  # 你可以选择其他颜色映射，如'viridis'，'inferno'等
+    cmap = cm.get_cmap('plasma')
     norm = plt.Normalize(vmin=np.min(depths), vmax=np.max(depths))  # 归一化深度值
 
     # 对每个投影点根据深度值设置颜色
@@ -255,9 +255,9 @@ def multi_project(ref_chan, cam_chan):
         if not (0 <= x < image.shape[1] and 0 <= y < image.shape[0]):
             continue  # 跳过无效点
         # 获取对应的颜色
-        color = cmap(norm(z))  # 使用深度值z来获取颜色
-        color = (color[2] * 255, color[1] * 255, color[0] * 255)  # 转换为BGR格式
-        # 绘制点，使用深度值对应的颜色
+        color = cmap(norm(z))  
+        color = (color[2] * 255, color[1] * 255, color[0] * 255)  
+        # 绘制点
         cv2.circle(image, (int(x), int(y)), 3, color, -1, 16)
 
     # 保存最终的图像
