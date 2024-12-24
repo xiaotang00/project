@@ -262,7 +262,7 @@ def main():
     ref_chan = "LIDAR_TOP"
     cam_chan = "CAM_FRONT"
 
-    multi_project(ref_chan, cam_chan,)
+    multi_project(ref_chan, cam_chan)
 
 if __name__ == "__main__":
     main()
