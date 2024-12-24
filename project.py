@@ -34,13 +34,6 @@ def project_lidar_to_image(lidar_points, lidar_to_global, global_to_image):
 def filter_lidar_points_in_fov(lidar_points, fov_deg=120):
     """
     过滤点云，满足前向 FOV 和特定条件（x > 1 或 z > 1）。
-
-    Args:
-        lidar_points (numpy.ndarray): 点云在相机坐标系下的坐标。
-        fov_deg (float): 前向视角范围（角度，默认120°）。
-
-    Returns:
-        numpy.ndarray: 过滤后的点云在相机坐标系下的坐标。
     """
     # 提取相机坐标系下的点云信息
     x, y, z = lidar_points[:, 0], lidar_points[:, 1], lidar_points[:, 2]
