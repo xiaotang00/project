@@ -36,7 +36,7 @@ def filter_lidar_points_in_fov(lidar_points, fov_deg=120):
     过滤点云，满足前向 FOV 和特定条件（x > 1 或 z > 1）。
 
     Args:
-        lidar_points (numpy.ndarray): 点云在相机坐标系下的坐标，形状为 (N, 3)。
+        lidar_points (numpy.ndarray): 点云在相机坐标系下的坐标。
         fov_deg (float): 前向视角范围（角度，默认120°）。
 
     Returns:
